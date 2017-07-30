@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,29 +17,25 @@ namespace deko1._2
             JSONUser jUser = new JSONUser();
             XMLUser xUser = new XMLUser();
 
+            //reads users from data files
             List<CSVUser> cUsers = cUser.readUsers();
             List<JSONUser> jUsers = jUser.readUsers();
             List<XMLUser> xUsers = xUser.readUsers();
 
-            var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers);
+            //merges JSON, XML & CSV to single IEnumerable
+            var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???-----------------------------
 
 
-            printUsers(cUsers, jUsers, xUsers);
+            List<User> users = allUsers.ToList();
+            users.Sort((x, y) => x.UserID.CompareTo(y.UserID));
+
+            //testing
+            printUsers(users);
         }
 
-        public static void printUsers(List<CSVUser> cUser, List<JSONUser> jUser, List<XMLUser> xUser)
+        public static void printUsers(IEnumerable<User> users)
         {
-            foreach (var user in cUser)
-            {
-                output(user);
-            }
-
-            foreach (var user in jUser)
-            {
-                output(user);
-            }
-
-            foreach (var user in xUser)
+            foreach (var user in users)
             {
                 output(user);
             }
