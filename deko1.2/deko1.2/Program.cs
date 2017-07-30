@@ -18,19 +18,29 @@ namespace deko1._2
             XMLUser xUser = new XMLUser();
 
             //reads users from data files
-            List<CSVUser> cUsers = cUser.readUsers();
-            List<JSONUser> jUsers = jUser.readUsers();
-            List<XMLUser> xUsers = xUser.readUsers();
+            List<CSVUser> cUsers = cUser.readUsers("../../data/users.csv");
+            List<JSONUser> jUsers = jUser.readUsers("../../data/users.csv");
+            List<XMLUser> xUsers = xUser.readUsers("../../data/users.csv");
 
             //merges JSON, XML & CSV to single IEnumerable
             var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???-----------------------------
 
-
+            //converted IEnumerable to List
             List<User> users = allUsers.ToList();
+
+            //Sorted UserID in ASC
             users.Sort((x, y) => x.UserID.CompareTo(y.UserID));
 
-            //testing
+            //output
             printUsers(users);
+
+
+
+            //write merged and sorted data files
+            cUser.writeUsers(users, "../../allData/users.csv");
+
+
+
         }
 
         public static void printUsers(IEnumerable<User> users)

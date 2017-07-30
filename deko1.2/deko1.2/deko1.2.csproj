@@ -55,6 +55,7 @@
     <Compile Include="XMLUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="allData\users.csv" />
     <None Include="App.config" />
     <None Include="data\users.csv" />
     <None Include="data\users.json" />

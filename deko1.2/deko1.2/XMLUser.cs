@@ -11,9 +11,8 @@ namespace deko1._2
 {
     public class XMLUser : User
     {
-        public List<XMLUser> readUsers()
+        public List<XMLUser> readUsers(string path)
         {
-            string path = "../../data/users.xml";
 
             XmlDocument doc = new XmlDocument();
             doc.Load(path);

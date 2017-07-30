@@ -13,9 +13,9 @@ namespace deko1._2
     class JSONUser : User
     {
 
-        public List<JSONUser> readUsers()
+        public List<JSONUser> readUsers(string path)
         {
-            using (StreamReader r = new StreamReader("../../data/users.json"))
+            using (StreamReader r = new StreamReader(path))
             {
                 string json = r.ReadToEnd();
                 var format = "dd-MM-yyyy HH:mm:ss"; // datetime format

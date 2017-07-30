@@ -5,24 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Reflection;
 
 namespace deko1._2
 {
     class CSVUser : User
     {
-        public List<CSVUser> readUsers()
+        public List<CSVUser> readUsers(string path)
         {
             //ADD try catch block ---------------------------------------------------
-            List<CSVUser> users = File.ReadAllLines("../../data/users.csv")
+            List<CSVUser> users = File.ReadAllLines(path)
                                            .Skip(1)
-                                           .Select(v => CSVUser.setUser(v))
+                                           .Select(v => CSVUser.getCSVUser(v))
                                            .ToList();
             return users;
         }
 
 
         //iterate through to get all
-        public static CSVUser setUser(string line)
+        public static CSVUser getCSVUser(string line)
         {
             string[] values = line.Split(',');
             CSVUser user = new CSVUser();
@@ -34,6 +35,22 @@ namespace deko1._2
             user.LastLoginTime = Convert.ToDateTime(values[5]);
 
             return user;
+        }
+
+        public void writeUsers<T>(IEnumerable<T> items, string path)
+        {
+            Type itemType = typeof(T);
+            var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            using (var writer = new StreamWriter(path))
+            {
+                writer.WriteLine(string.Join(", ", props.Select(p => p.Name)));
+
+                foreach (var item in items)
+                {
+                    writer.WriteLine(string.Join(", ", props.Select(p => p.GetValue(item, null))));
+                }
+            }
         }
 
     }
