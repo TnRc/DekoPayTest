@@ -37,7 +37,7 @@ namespace deko1._2
             return user;
         }
 
-        public void writeUsers<T>(IEnumerable<T> items, string path)
+        public void writeUsers<T>(IEnumerable<T> users, string path)
         {
             Type itemType = typeof(T);
             var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -46,9 +46,9 @@ namespace deko1._2
             {
                 writer.WriteLine(string.Join(", ", props.Select(p => p.Name)));
 
-                foreach (var item in items)
+                foreach (var user in users)
                 {
-                    writer.WriteLine(string.Join(", ", props.Select(p => p.GetValue(item, null))));
+                    writer.WriteLine(string.Join(", ", props.Select(p => p.GetValue(user, null))));
                 }
             }
         }

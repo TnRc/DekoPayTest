@@ -9,8 +9,11 @@ using System.Xml.Serialization;
 
 namespace deko1._2
 {
+    [Serializable()]
     public class XMLUser : User
     {
+        public XMLUser() { }
+
         public List<XMLUser> readUsers(string path)
         {
 
@@ -34,6 +37,53 @@ namespace deko1._2
 
             return users;
 
+        }
+
+        //public void writeUsers<T>(IEnumerable<T> users, string path)
+        //{
+        //    if (users == null) { return; }
+
+        //    try
+        //    {
+        //        XmlDocument xmlDocument = new XmlDocument();
+        //        XmlSerializer serializer = new XmlSerializer(users.GetType());
+        //        using (MemoryStream stream = new MemoryStream())
+        //        {
+        //            serializer.Serialize(stream, users);
+        //            stream.Position = 0;
+        //            xmlDocument.Load(stream);
+        //            xmlDocument.Save(path);
+        //            stream.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //Log exception here
+        //    }
+        //}
+
+        
+        public void writeUsers<T>(T users, string path, bool append = false) where T : new()
+        {
+            //TextWriter writer = null;
+            var writer = new XmlSerializer(users.GetType());
+
+            try
+            {
+                //var serializer = new XmlSerializer(typeof(T));
+                //writer = new StreamWriter(path, append);
+                //serializer.Serialize(writer, users);
+
+                
+                var file = new StreamWriter(path);
+                writer.Serialize(file, users);
+
+            }
+            finally
+            {
+                //if (writer != null)
+                //    writer.Close();
+            }
         }
     }
 }

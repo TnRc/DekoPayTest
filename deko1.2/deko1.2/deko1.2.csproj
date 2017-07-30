@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="allData\users.xml" />
     <Content Include="data\users.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
