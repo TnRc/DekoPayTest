@@ -20,11 +20,12 @@ namespace deko1._2
             List<JSONUser> jUsers = jUser.readUsers();
             List<XMLUser> xUsers = xUser.readUsers();
 
+            var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers);
+
 
             printUsers(cUsers, jUsers, xUsers);
         }
 
-            
         public static void printUsers(List<CSVUser> cUser, List<JSONUser> jUser, List<XMLUser> xUser)
         {
             foreach (var user in cUser)

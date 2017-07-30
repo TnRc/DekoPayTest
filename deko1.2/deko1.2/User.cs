@@ -28,5 +28,8 @@ namespace deko1._2
         [JsonProperty("last_login_time")]
         public DateTime LastLoginTime { get; set; }
         
+
     }
+
+
 }
