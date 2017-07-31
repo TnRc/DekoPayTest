@@ -36,9 +36,6 @@ namespace deko1._2
         [XmlElement("lastlogintime")]
         public DateTime LastLoginTime { get; set; }
 
-        [XmlArray("users")]
-        public List<User> UserList { get; set; }
-
         public User() { }
         
 

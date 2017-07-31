@@ -41,12 +41,13 @@ namespace deko1._2
 
         public void writeUsers(List<User> users, string path)
         {
-            User oUser = new User();
-            oUser.UserList = new List<User>();
+            UserList userList = new UserList();
+            userList.Users = new List<User>();
 
             foreach (var user in users)
             {
-                oUser.UserList.Add(new User() {
+                userList.Users.Add(new User()
+                {
                     UserID = user.UserID,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -61,8 +62,8 @@ namespace deko1._2
             ns.Add("", "");
 
             FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
-            XmlSerializer serializer = new XmlSerializer(typeof(User));
-            serializer.Serialize(stream, oUser, ns);
+            XmlSerializer serializer = new XmlSerializer(typeof(UserList));
+            serializer.Serialize(stream, userList, ns);
         }
     }
 }
