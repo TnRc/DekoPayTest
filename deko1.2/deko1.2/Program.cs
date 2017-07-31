@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace deko1._2
 {
@@ -43,11 +44,7 @@ namespace deko1._2
 
 
 
-
         }
-
-
-
 
         public static void printUsers(IEnumerable<User> users)
         {

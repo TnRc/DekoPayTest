@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace deko1._2
 {
-    [Serializable()]
+    [Serializable]
     public class XMLUser : User
     {
         public XMLUser() { }
@@ -39,51 +39,19 @@ namespace deko1._2
 
         }
 
-        //public void writeUsers<T>(IEnumerable<T> users, string path)
-        //{
-        //    if (users == null) { return; }
-
-        //    try
-        //    {
-        //        XmlDocument xmlDocument = new XmlDocument();
-        //        XmlSerializer serializer = new XmlSerializer(users.GetType());
-        //        using (MemoryStream stream = new MemoryStream())
-        //        {
-        //            serializer.Serialize(stream, users);
-        //            stream.Position = 0;
-        //            xmlDocument.Load(stream);
-        //            xmlDocument.Save(path);
-        //            stream.Close();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log exception here
-        //    }
-        //}
-
-        
-        public void writeUsers<T>(T users, string path, bool append = false) where T : new()
+        public void writeUsers(List<User> users, string path)
         {
-            //TextWriter writer = null;
-            var writer = new XmlSerializer(users.GetType());
+            Foo f = new Foo();
+            f.BarList = new List<Bar>();
 
-            try
+            foreach (var user in users)
             {
-                //var serializer = new XmlSerializer(typeof(T));
-                //writer = new StreamWriter(path, append);
-                //serializer.Serialize(writer, users);
-
-                
-                var file = new StreamWriter(path);
-                writer.Serialize(file, users);
-
+                f.BarList.Add(new Bar() { Property1 = user.FirstName, Property2 = user.LastName });
             }
-            finally
-            {
-                //if (writer != null)
-                //    writer.Close();
-            }
+
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            System.Xml.Serialization.XmlSerializer s = new System.Xml.Serialization.XmlSerializer(typeof(Foo));
+            s.Serialize(fs, f);
         }
     }
 }

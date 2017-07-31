@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace deko1._2
 {
+    [Serializable]
     public class User
     {
         [JsonProperty("user_id")]
@@ -27,6 +28,8 @@ namespace deko1._2
 
         [JsonProperty("last_login_time")]
         public DateTime LastLoginTime { get; set; }
+        
+        public User() { }
         
 
     }

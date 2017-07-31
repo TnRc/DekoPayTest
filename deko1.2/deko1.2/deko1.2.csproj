@@ -47,10 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bar.cs" />
     <Compile Include="CSVUser.cs" />
+    <Compile Include="Foo.cs" />
     <Compile Include="JSONUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test.cs" />
     <Compile Include="User.cs" />
     <Compile Include="XMLUser.cs" />
   </ItemGroup>
@@ -63,7 +66,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="allData\users.xml" />
+    <Content Include="allData\users.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="data\users.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
