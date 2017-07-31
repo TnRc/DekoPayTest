@@ -39,7 +39,7 @@ namespace deko1._2
 
             //write merged and sorted data files
             cUser.writeUsers(users, "../../allData/users.csv");
-            //jUser.writeUsers(users, "../../allData/users.json");
+            jUser.writeUsers(users, "../../allData/users.json");
             xUser.writeUsers(users, "../../allData/users.xml");
 
 

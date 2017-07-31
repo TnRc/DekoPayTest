@@ -56,9 +56,13 @@ namespace deko1._2
                 });
             }
 
+            //removes the xsi and xsd in root tag
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+
             FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
             XmlSerializer serializer = new XmlSerializer(typeof(User));
-            serializer.Serialize(stream, oUser);
+            serializer.Serialize(stream, oUser, ns);
         }
     }
 }

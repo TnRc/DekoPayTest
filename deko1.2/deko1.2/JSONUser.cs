@@ -24,6 +24,22 @@ namespace deko1._2
                 return users;
             }
         }
+
+        public void writeUsers<T>(IEnumerable<T> users, string path)
+        {
+            TextWriter writer = null;
+            try
+            {
+                var contentsToWriteToFile = JsonConvert.SerializeObject(users);
+                writer = new StreamWriter(path, false);
+                writer.Write(contentsToWriteToFile);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
     }
 }
 
