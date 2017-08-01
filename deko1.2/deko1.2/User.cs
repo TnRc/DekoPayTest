@@ -37,7 +37,32 @@ namespace deko1._2
         public DateTime LastLoginTime { get; set; }
 
         public User() { }
-        
+
+        public User(int id)
+        {
+            UserID = id;
+        }
+
+        public void sortUsersAsc(List<User> users)
+        {
+            users.Sort((x, y) => x.UserID.CompareTo(y.UserID));
+        }
+
+        public IEnumerable<User> mergeUsers(List<CSVUser> cUsers, List<JSONUser> jUsers, List<XMLUser> xUsers)
+        {
+
+            return cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???;
+        }
+
+        //public void CSVUser(int id, string fname, string lname, string username, string type, DateTime login)
+        //{
+        //    UserID = id;
+        //    FirstName = fname;
+        //    LastName = lname;
+        //    Username = username;
+        //    UserType = type;
+        //    LastLoginTime = login;
+        //}
 
     }
 

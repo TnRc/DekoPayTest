@@ -12,8 +12,10 @@ namespace deko1._2
 {
     class Program
     {
+
         static void Main(string[] args)
         {
+            User user = new User();
             CSVUser cUser = new CSVUser();
             JSONUser jUser = new JSONUser();
             XMLUser xUser = new XMLUser();
@@ -24,20 +26,18 @@ namespace deko1._2
             List<XMLUser> xUsers = xUser.readUsers("../../data/users.xml");
 
             //merges JSON, XML & CSV to single IEnumerable
-            var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???-----------------------------
+            var allUsers = user.mergeUsers(cUsers, jUsers, xUsers);
 
             //converted IEnumerable to List
             List<User> users = allUsers.ToList();
 
             //Sorted UserID in ASC
-            users.Sort((x, y) => x.UserID.CompareTo(y.UserID));
+            user.sortUsersAsc(users);
 
-            //output
+            //output (testing)
             printUsers(users);
 
-
-
-            //write merged and sorted data files
+            //write new user list to data files
             cUser.writeUsers(users, "../../allData/users.csv");
             jUser.writeUsers(users, "../../allData/users.json");
             xUser.writeUsers(users, "../../allData/users.xml");
@@ -56,7 +56,7 @@ namespace deko1._2
 
         private static void output(User user)
         {
-            System.Diagnostics.Debug.WriteLine(user.FirstName + " " + user.UserID);
+            System.Diagnostics.Debug.WriteLine(user.UserID + " " + user.FirstName + " " + user.LastName);
         }
     }
 }

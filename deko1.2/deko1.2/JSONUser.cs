@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace deko1._2
 {
-    class JSONUser : User
+    public class JSONUser : User
     {
 
         public List<JSONUser> readUsers(string path)

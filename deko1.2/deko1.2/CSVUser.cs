@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace deko1._2
 {
-    class CSVUser : User
+    public class CSVUser : User
     {
         public List<CSVUser> readUsers(string path)
         {
