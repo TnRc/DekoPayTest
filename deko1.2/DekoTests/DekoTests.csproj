@@ -51,8 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CSVUserTest.cs" />
-    <Compile Include="JSONUserTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
@@ -61,6 +59,11 @@
       <Project>{45e2f3a6-9466-4dca-9193-63fb87a45b5c}</Project>
       <Name>deko1.2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testData\actualData\johndoe.csv" />
+    <None Include="testData\CSV\johndoe.csv" />
+    <None Include="testData\expectedData\johndoe.csv" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

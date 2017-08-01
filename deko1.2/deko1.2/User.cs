@@ -50,7 +50,6 @@ namespace deko1._2
 
         public IEnumerable<User> mergeUsers(List<CSVUser> cUsers, List<JSONUser> jUsers, List<XMLUser> xUsers)
         {
-
             return cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???;
         }
 

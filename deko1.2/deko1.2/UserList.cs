@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace deko1._2
 {
+    //class is used to write users to xml file
     [XmlRoot("UserList")]
     public class UserList
     {

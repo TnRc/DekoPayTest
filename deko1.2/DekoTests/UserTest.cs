@@ -12,7 +12,7 @@ namespace DekoTests
     public class UserTest
     {
         [TestMethod]
-        public void SortUsersAsc_DoesSortUsersAsc()
+        public void User_SortUsersAsc_DoesSortUsersAsc()
         {
             //Arrnage
             User user = new User();
@@ -43,7 +43,5 @@ namespace DekoTests
 
         }
 
-        //test merging data files
-        //test merging data files with duplicate users
     }
 }

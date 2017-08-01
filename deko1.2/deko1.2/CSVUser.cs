@@ -13,12 +13,19 @@ namespace deko1._2
     {
         public List<CSVUser> readUsers(string path)
         {
-            //ADD try catch block ---------------------------------------------------
-            List<CSVUser> users = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => CSVUser.getCSVUser(v))
-                                           .ToList();
-            return users;
+            try
+            {
+                List<CSVUser> users = File.ReadAllLines(path)
+                                               .Skip(1)
+                                               .Select(v => CSVUser.getCSVUser(v))
+                                               .ToList();
+                return users;
+            }
+            catch (IOException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                return null;
+            }
         }
 
 
@@ -39,19 +46,25 @@ namespace deko1._2
 
         public void writeUsers<T>(IEnumerable<T> users, string path)
         {
-            Type itemType = typeof(T);
-            var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            using (var writer = new StreamWriter(path))
+            try
             {
-                writer.WriteLine(string.Join(", ", props.Select(p => p.Name)));
+                Type itemType = typeof(T);
+                var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-                foreach (var user in users)
+                using (var writer = new StreamWriter(path))
                 {
-                    writer.WriteLine(string.Join(", ", props.Select(p => p.GetValue(user, null))));
+                    writer.WriteLine(string.Join(", ", props.Select(p => p.Name)));
+
+                    foreach (var user in users)
+                    {
+                        writer.WriteLine(string.Join(", ", props.Select(p => p.GetValue(user, null))));
+                    }
                 }
             }
+            catch (IOException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
         }
-
     }
 }

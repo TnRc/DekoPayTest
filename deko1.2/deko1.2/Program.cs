@@ -42,21 +42,14 @@ namespace deko1._2
             jUser.writeUsers(users, "../../allData/users.json");
             xUser.writeUsers(users, "../../allData/users.xml");
 
-
-
         }
 
         public static void printUsers(IEnumerable<User> users)
         {
             foreach (var user in users)
             {
-                output(user);
+                System.Diagnostics.Debug.WriteLine(user.UserID + " " + user.FirstName + " " + user.LastName);
             }
-        }
-
-        private static void output(User user)
-        {
-            System.Diagnostics.Debug.WriteLine(user.UserID + " " + user.FirstName + " " + user.LastName);
         }
     }
 }

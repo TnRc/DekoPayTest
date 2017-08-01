@@ -15,29 +15,44 @@ namespace deko1._2
 
         public List<JSONUser> readUsers(string path)
         {
-            using (StreamReader r = new StreamReader(path))
+            try
             {
-                string json = r.ReadToEnd();
-                var format = "dd-MM-yyyy HH:mm:ss"; // datetime format
-                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
-                List<JSONUser> users = JsonConvert.DeserializeObject<List<JSONUser>>(json, dateTimeConverter);
-                return users;
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    var format = "dd-MM-yyyy HH:mm:ss"; // datetime format
+                    var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
+                    List<JSONUser> users = JsonConvert.DeserializeObject<List<JSONUser>>(json, dateTimeConverter);
+                    return users;
+                }
+            }
+            catch (IOException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                return null;
             }
         }
 
         public void writeUsers<T>(IEnumerable<T> users, string path)
         {
-            TextWriter writer = null;
             try
             {
-                var contentsToWriteToFile = JsonConvert.SerializeObject(users);
-                writer = new StreamWriter(path, false);
-                writer.Write(contentsToWriteToFile);
+                TextWriter writer = null;
+                try
+                {
+                    var contentsToWriteToFile = JsonConvert.SerializeObject(users);
+                    writer = new StreamWriter(path, false);
+                    writer.Write(contentsToWriteToFile);
+                }
+                finally
+                {
+                    if (writer != null)
+                        writer.Close();
+                }
             }
-            finally
+            catch (IOException e)
             {
-                if (writer != null)
-                    writer.Close();
+                System.Diagnostics.Debug.WriteLine(e.ToString());
             }
         }
     }
