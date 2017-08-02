@@ -1,0 +1,11 @@
+﻿<?xml version="1.0"?>
+  <users>
+    <user>
+      <userid>1</userid>
+      <firstname>John</firstname>
+      <surname>Doe</surname>
+      <username>John1</username>
+      <type>Employee</type>
+      <lastlogintime>2015-01-12T12:01:34</lastlogintime>
+    </user>
+  </users>

@@ -46,8 +46,10 @@ namespace deko1._2
 
         }
 
-        public void writeUsers(List<User> users, string path)
+        public void writeUsers(IEnumerable<User> ieUsers, string path)
         {
+            List<User> users = new List<User>();
+            users = ieUsers.ToList();
             try
             {
                 UserList userList = new UserList();
@@ -73,6 +75,7 @@ namespace deko1._2
                 FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
                 XmlSerializer serializer = new XmlSerializer(typeof(UserList));
                 serializer.Serialize(stream, userList, ns);
+                stream.Dispose();
             }
             catch (IOException e)
             {

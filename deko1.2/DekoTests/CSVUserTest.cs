@@ -11,41 +11,40 @@ using System.Threading.Tasks;
 namespace DekoTests
 {
     [TestClass]
-    public class CSVUserTest : User
+    public class CSVUserTest : TestLogic
     {
         //test serializing/deserializing
         //test nonexistent file path
-        //add try catch block
+        
+        [TestMethod]
+        public void CSVUser_ReadUsers_DoesReadJohnDoeCSV()
+        {
+            var path = "../../testData/reading/CSV/johndoe.csv";
+
+            CSVUser actualUser = new CSVUser();
+            List<CSVUser> actual = actualUser.readUsers(path);
 
 
+            CSVUser expectedUser = new CSVUser()
+            {
+                UserID = 1,
+                FirstName ="John",
+                LastName = "Doe",
+                Username = "John1",
+                UserType = "Employee"
+            };         
+            List<CSVUser> expected = new List<CSVUser>();
+            expected.Add(expectedUser);
 
+            CollectionAssert.Equals(expected, actual);
 
-        //[TestMethod]
-        //public void CSVUsertTest_ReadUsers_DoesReadJohnDoeCSV()
-        //{
-        //    //Arrange
-        //    User u = new User(1, "John", "Doe", "John1", "Employee");
-
-
-        //    CSVUser user = new CSVUser();
-        //    var path = "../../testData/johndoe.csv";
-
-        //    //Act
-        //    List<CSVUser> result = user.readUsers(path);
-        //    List<CSVUser> expected = new List<CSVUser>();
-        //    expected.Add(u);
-
-
-        //    //Assert
-        //    Assert.AreEqual(expected, result);
-
-        //}
+        }
 
         [TestMethod]
         public void CSVUser_WriteUsers_DoesWriteJohnDoeCSV()
         {
-            const string expectedFile = @"../../../DekoTests/testData/expectedData/johndoe.csv";
-            const string actualFile = @"../../../DekoTests/testData/actualData/johndoe.csv";
+            const string expectedFile = @"../../testData/writing/expectedData/CSV/johndoe.csv";
+            const string actualFile = @"../../testData/writing/actualData/CSV/johndoe.csv";
             CSVUser user = new CSVUser();
 
             // prepare expected collection
@@ -68,17 +67,17 @@ namespace DekoTests
             var expectedHash = GetFileHash(expectedFile);
             var actualHash = GetFileHash(actualFile);
 
-            Assert.AreEqual(expectedHash, actualHash);
+            CollectionAssert.Equals(expectedHash, actualHash);
         }
 
 
 
-
+        //test
         [TestMethod]
-        public void CompareTwoFiles()
+        public void TEMP_CompareTwoFiles()
         {
-            const string expectedFile = @"../../../DekoTests/testData/expectedData/johndoe.csv";
-            const string actualFile = @"../../../DekoTests/testData/actualData/johndoe.csv";
+            const string expectedFile = @"../../testData/reading/CSV/johndoe.csv";
+            const string actualFile = @"../../testData/reading/CSV/johndoe.csv";
 
             var expectedHash = GetFileHash(expectedFile);
             var actualHash = GetFileHash(actualFile);
@@ -90,24 +89,7 @@ namespace DekoTests
 
 
 
-        public string GetFileHash(string filename)
-        {
-            var hash = new SHA1Managed();
-            var clearBytes = File.ReadAllBytes(filename);
-            var hashedBytes = hash.ComputeHash(clearBytes);
-            return ConvertBytesToHex(hashedBytes);
-        }
-
-        public string ConvertBytesToHex(byte[] bytes)
-        {
-            var sb = new StringBuilder();
-
-            for (var i = 0; i < bytes.Length; i++)
-            {
-                sb.Append(bytes[i].ToString("x"));
-            }
-            return sb.ToString();
-        }
+        
 
     }
 }

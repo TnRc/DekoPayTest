@@ -37,21 +37,25 @@ namespace deko1._2
         public DateTime LastLoginTime { get; set; }
 
         public User() { }
+        
 
-        public User(int id)
-        {
-            UserID = id;
-        }
 
         public void sortUsersAsc(List<User> users)
         {
             users.Sort((x, y) => x.UserID.CompareTo(y.UserID));
         }
 
-        public IEnumerable<User> mergeUsers(List<CSVUser> cUsers, List<JSONUser> jUsers, List<XMLUser> xUsers)
+
+
+        public List<User> mergeUsers(List<CSVUser> cUsers, List<JSONUser> jUsers, List<XMLUser> xUsers)
         {
-            return cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???;
+            List<User> users = new List<User>();
+            var allUsers = cUsers.Concat<User>(jUsers).Concat<User>(xUsers); //use union for duplicate data???;
+            //converted IEnumerable to List
+            return users = allUsers.ToList();
         }
+
+
 
         //public void CSVUser(int id, string fname, string lname, string username, string type, DateTime login)
         //{

@@ -26,10 +26,7 @@ namespace deko1._2
             List<XMLUser> xUsers = xUser.readUsers("../../data/users.xml");
 
             //merges JSON, XML & CSV to single IEnumerable
-            var allUsers = user.mergeUsers(cUsers, jUsers, xUsers);
-
-            //converted IEnumerable to List
-            List<User> users = allUsers.ToList();
+            List<User> users = user.mergeUsers(cUsers, jUsers, xUsers);
 
             //Sorted UserID in ASC
             user.sortUsersAsc(users);
